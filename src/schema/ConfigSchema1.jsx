@@ -15,7 +15,7 @@ export default ({data},props) => {
             },
             nameSpace2:{
                 subNameSpace2:{
-                    parameter4: data.parameter4
+                    parameter4: Number(data.parameter4)
                 },
                 parameter8: data.parameter8
             }

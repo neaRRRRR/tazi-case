@@ -13,6 +13,8 @@ function App() {
   let [arr2,setArr2] = useState([])
   let [cf1,setCf1] = useState('')
   let [cf2,setCf2] = useState('')
+  let [editMod,setEdit] = useState(false)
+  let [index,setIndex] = useState()
 
   let handleForm = (val) => {
     
@@ -43,6 +45,16 @@ function App() {
     }
   }
 
+  let handleEdit = (val) => {
+    console.log(val)
+    arr[index].configName = val.configName
+    arr[index].parameter1 = val.parameter1
+    arr[index].parameter2 = val.parameter2
+    arr[index].parameter3 = val.parameter3
+    arr[index].parameter4 = val.parameter4
+    arr[index].parameter8 = val.parameter8
+  }
+
   return (
     <div className="grid-container">
 
@@ -51,7 +63,17 @@ function App() {
      <button className="cfg-btn" style={{width:'120px'}} onClick={() => {setSelected('ConfigSchema2')}} >ConfigSchema2</button> 
      <h2>{selected}</h2>    
     
-      {selected == 'ConfigSchema1' ?
+      {editMod ?
+        <>
+       <h3>{'Editing '+arr[index].configName}</h3>
+       <DynamicForm fields={formData1} cbSubmit={handleEdit}  />
+        </>
+       
+       
+        :
+        
+        
+        selected == 'ConfigSchema1' ?
       <> 
       <DynamicForm fields={formData1} cbSubmit={handleForm}  />
       {arr.length > 4 ? <p style={{color:'red'}}>Can not add more !</p> : ''}
@@ -62,7 +84,11 @@ function App() {
       {arr2.length > 4 ? <p style={{color:'red'}}>Can not add more !</p> : ''}
       {customVal ? <p style={{color:'red'}}>Parameter16 should be multiple of 0.1</p> : ''}
       </>
-       }
+        
+         
+         
+      }
+      
      
      {/* {arr.length > 4 ? <p style={{color:'red'}}>Can not add more !</p> : ''} */}
      </div>
@@ -70,7 +96,7 @@ function App() {
        <div>
         {arr.map((item,i) => {
           return(
-            <button className="cfg-btn" onClick={() => {setCf1(item)}}>{item.configName}</button>
+            <button className="cfg-btn" onClick={() => {setCf1(item); setIndex(i)}}>{item.configName}</button>
           )
         })}
         </div>
@@ -86,7 +112,9 @@ function App() {
         <ConfigSchema1 data={cf1}/>
         
         <ConfigSchema2 data={cf2}/>
+
         </div>
+        {arr.length > 0 ? <button className="cfg-btn" onClick={() => {setEdit(!editMod)}}>EDIT</button> : ''}
     </div>
   
 </div>
