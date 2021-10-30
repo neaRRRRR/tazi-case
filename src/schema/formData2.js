@@ -50,11 +50,11 @@ export const formData2 = [
         validations: [
             {
                 type: "min",
-                params: [0, "parameter4 should be greater than 0"],
+                params: [0, "parameter15 should be greater than 0"],
               },
               {
                 type: "max",
-                params: [1, "parameter4 should be lower than 1"],
+                params: [1, "parameter15 should be lower than 1"],
               },
         ],
   
@@ -69,12 +69,12 @@ export const formData2 = [
         validations: [
             {
               type: "min",
-              params: [-1, "parameter4 should be greater than -1"],
+              params: [-1, "parameter16 should be greater than -1"],
             },
             {
               type: "max",
-              params: [1, "parameter4 should be lower than 1"],
-            },
+              params: [1, "parameter16 should be lower than 1"],
+            }
         ],
   
       },

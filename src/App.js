@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   let [selected,setSelected] = useState('ConfigSchema1')
+  let [customVal,setCustomVal] = useState(false)
   let [arr,setArr] = useState([])
   let [arr2,setArr2] = useState([])
   let [cf1,setCf1] = useState('')
@@ -25,11 +26,20 @@ function App() {
 
   
   let handleForm2 = (val) => {
-    if(arr2.length > 4){
-      console.log('nop')
+    console.log(val.parameter16 * 10)
+    console.log((val.parameter16 * 10) % 1 == 0)
+    if(!((val.parameter16 * 10) % 1 == 0)){
+      setCustomVal(true)
     }
     else{
-      setArr2([...arr2,val])
+      if(arr2.length > 4){
+        console.log('nop')
+      }
+      else{
+        setArr2([...arr2,val])
+        setCustomVal(false)
+      }
+      
     }
   }
 
@@ -50,6 +60,7 @@ function App() {
       <> 
       <DynamicForm fields={formData2} cbSubmit={handleForm2} />
       {arr2.length > 4 ? <p style={{color:'red'}}>Can not add more !</p> : ''}
+      {customVal ? <p style={{color:'red'}}>Parameter16 should be multiple of 0.1</p> : ''}
       </>
        }
      
