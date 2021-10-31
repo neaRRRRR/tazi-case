@@ -79,6 +79,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    setIndex('')
+  },[arr,arr2])
+
   return (
     <div className="grid-container">
 
@@ -141,8 +145,10 @@ function App() {
         <ConfigSchema2 data={cf2}/>
 
         </div>
-        {arr.length > 0 || arr2.length > 0 ? <button className="cfg-btn" onClick={() => {setEdit(!editMod)}}>EDIT</button> : ''}
-        {arr.length > 0 || arr2.length > 0 ? <button className="cfg-btn" onClick={() => {handleDelete()}}>DELETE</button> : ''}
+        {editMod ? `Editing ${index.data.configName}` : ''}
+        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" style={{height:'35px'}} onClick={() => {setEdit(!editMod)}}>{editMod ? 'EXIT EDIT MODE' : 'EDIT MODE'}</button> : ''}
+        {index ? `Delete ${index.data.configName}?` : ''}
+        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" onClick={() => {handleDelete()}}>DELETE</button> : ''}
     </div>
   
 </div>
