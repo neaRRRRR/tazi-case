@@ -21,6 +21,8 @@ textarea{
   height: 500px;
   width: 500px;
   resize: none;
+  margin-right: 25px;
+  margin-top: 25px;
 }
 
 .cfg-btn{

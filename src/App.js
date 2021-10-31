@@ -47,23 +47,36 @@ function App() {
 
   let handleEdit = (val) => {
     console.log(val)
+    let idx = index.ind
     if(selected == "ConfigSchema1"){
-      arr[index].configName = val.configName
-      arr[index].parameter1 = val.parameter1
-      arr[index].parameter2 = val.parameter2
-      arr[index].parameter3 = val.parameter3
-      arr[index].parameter4 = val.parameter4
-      arr[index].parameter8 = val.parameter8
+      arr[idx].configName = val.configName
+      arr[idx].parameter1 = val.parameter1
+      arr[idx].parameter2 = val.parameter2
+      arr[idx].parameter3 = val.parameter3
+      arr[idx].parameter4 = val.parameter4
+      arr[idx].parameter8 = val.parameter8
     }else{
-      arr2[index].configName = val.configName
-      arr2[index].parameter10 = val.parameter10
-      arr2[index].parameter14 = val.parameter14
-      arr2[index].parameter15 = val.parameter15
-      arr2[index].parameter16 = val.parameter16
-      arr2[index].parameter17 = val.parameter17
-      arr2[index].parameter18 = val.parameter18
+      arr2[idx].configName = val.configName
+      arr2[idx].parameter10 = val.parameter10
+      arr2[idx].parameter14 = val.parameter14
+      arr2[idx].parameter15 = val.parameter15
+      arr2[idx].parameter16 = val.parameter16
+      arr2[idx].parameter17 = val.parameter17
+      arr2[idx].parameter18 = val.parameter18
     }
     
+  }
+
+  let handleDelete = () => {
+    let {schema,ind,data} = index
+    if(schema == 'cf1'){
+      arr = arr.filter(item => item !== data)
+      setArr(arr)
+    }
+    else{
+      arr2 = arr2.filter(item => item !== data)
+      setArr2(arr2)
+    }
   }
 
   return (
@@ -74,14 +87,14 @@ function App() {
      <button className="cfg-btn" style={{width:'120px'}} onClick={() => {setSelected('ConfigSchema2')}} >ConfigSchema2</button> 
      <h2>{selected}</h2>    
     
-      {editMod ? selected == "ConfigSchema1" ?
+      {editMod ? index.schema == "cf1" ?
         <>
-       <h3>{'Editing '+arr[index].configName}</h3>
+       <h3>{'Editing '+cf1.configName}</h3>
        <DynamicForm fields={formData1} cbSubmit={handleEdit}  />
         </>
         :
         <>
-        <h3>{'Editing '+arr2[index].configName}</h3>
+        <h3>{'Editing '+cf2.configName}</h3>
         <DynamicForm fields={formData2} cbSubmit={handleEdit}  />
         </>
         :
@@ -110,25 +123,26 @@ function App() {
        <div>
         {arr.map((item,i) => {
           return(
-            <button className="cfg-btn" onClick={() => {setCf1(item); setIndex(i)}}>{item.configName}</button>
+            <button className="cfg-btn" onClick={() => {setCf1(item); setIndex({schema:'cf1',ind:i,data:item})}}>{item.configName}</button>
           )
         })}
         </div>
         <div>
         {arr2.map((item,i) => {
           return(
-            <button className="cfg-btn" onClick={() => {setCf2(item); setIndex(i)}}>{item.configName}</button>
+            <button className="cfg-btn" onClick={() => {setCf2(item); setIndex({schema:'cf2',ind:i,data:item})}}>{item.configName}</button>
           )
         })}
         </div>
         <div style={{display:'flex'}}>
         
-        <ConfigSchema1 data={cf1}/>
+        <ConfigSchema1 data={cf1} />
         
         <ConfigSchema2 data={cf2}/>
 
         </div>
         {arr.length > 0 || arr2.length > 0 ? <button className="cfg-btn" onClick={() => {setEdit(!editMod)}}>EDIT</button> : ''}
+        {arr.length > 0 || arr2.length > 0 ? <button className="cfg-btn" onClick={() => {handleDelete()}}>DELETE</button> : ''}
     </div>
   
 </div>
