@@ -10,7 +10,7 @@ export default ({data},props) => {
             parameter10 : data.parameter10,
             nameSpace3:{
                 subNameSpace4:{
-                    parameter14: data.parameter14 == "" ? true : Boolean(data.parameter14),
+                    parameter14: Boolean(data.parameter14 === "true"),
                     parameter15: data.parameter15 == "" ? 0.35 : Number(data.parameter15)
                 },
                 subNameSpace5:{
