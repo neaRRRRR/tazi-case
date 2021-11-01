@@ -2,6 +2,7 @@ import React from 'react'
 
 export default ({data},props) => {
 
+        
     
     
     let configSchema2 = {
@@ -9,12 +10,12 @@ export default ({data},props) => {
             parameter10 : data.parameter10,
             nameSpace3:{
                 subNameSpace4:{
-                    parameter14: Boolean(data.parameter14),
-                    parameter15: Number(data.parameter15)
+                    parameter14: data.parameter14 == "" ? true : Boolean(data.parameter14),
+                    parameter15: data.parameter15 == "" ? 0.35 : Number(data.parameter15)
                 },
                 subNameSpace5:{
                     subNameSpace6:{
-                        parameter16: Number(data.parameter16),
+                        parameter16: data.parameter16 == "" ? 0.7 : Number(data.parameter16),
                         parameter17: data.parameter17
                     }
                 },

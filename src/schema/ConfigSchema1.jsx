@@ -9,13 +9,13 @@ export default ({data},props) => {
             nameSpace1: {
                 subNameSpace1 : {
                     parameter1 : data.parameter1,
-                    parameter2: Number(data.parameter2)
+                    parameter2: data.parameter2 == "" ? 5 :Number(data.parameter2)
                 },
-                parameter3: (data.parameter3 === "true")
+                parameter3: Boolean(data.parameter3 === "true")
             },
             nameSpace2:{
                 subNameSpace2:{
-                    parameter4: Number(data.parameter4)
+                    parameter4: data.parameter4 == "" ? -2 : Number(data.parameter4)
                 },
                 parameter8: data.parameter8
             }

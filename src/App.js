@@ -48,14 +48,15 @@ function App() {
   let handleEdit = (val) => {
     console.log(val)
     let idx = index.ind
-    if(selected == "ConfigSchema1"){
+    let sch = index.schema
+    if(sch == "cf1"){
       arr[idx].configName = val.configName
       arr[idx].parameter1 = val.parameter1
       arr[idx].parameter2 = val.parameter2
       arr[idx].parameter3 = val.parameter3
       arr[idx].parameter4 = val.parameter4
       arr[idx].parameter8 = val.parameter8
-    }else{
+    }else if(sch == "cf2"){
       arr2[idx].configName = val.configName
       arr2[idx].parameter10 = val.parameter10
       arr2[idx].parameter14 = val.parameter14
@@ -73,7 +74,7 @@ function App() {
       arr = arr.filter(item => item !== data)
       setArr(arr)
     }
-    else{
+    else if(schema == 'cf2'){
       arr2 = arr2.filter(item => item !== data)
       setArr2(arr2)
     }
@@ -89,16 +90,16 @@ function App() {
     <div className="grid-child left">
      <button className="cfg-btn" style={{width:'130px'}} onClick={() => {setSelected('ConfigSchema1')}}>ConfigSchema1</button>
      <button className="cfg-btn" style={{width:'120px'}} onClick={() => {setSelected('ConfigSchema2')}} >ConfigSchema2</button> 
-     <h2>{selected}</h2>    
+     <h2>{editMod ? 'Editing '+index.data.configName : 'Add '+selected}</h2>    
     
       {editMod ? index.schema == "cf1" ?
         <>
-       <h3>{'Editing '+cf1.configName}</h3>
+       
        <DynamicForm fields={formData1} cbSubmit={handleEdit}  />
         </>
         :
         <>
-        <h3>{'Editing '+cf2.configName}</h3>
+        
         <DynamicForm fields={formData2} cbSubmit={handleEdit}  />
         </>
         :
@@ -146,9 +147,9 @@ function App() {
 
         </div>
         {editMod ? `Editing ${index.data.configName}` : ''}
-        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" style={{height:'35px'}} onClick={() => {setEdit(!editMod)}}>{editMod ? 'EXIT EDIT MODE' : 'EDIT MODE'}</button> : ''}
+        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" style={{height:'35px'}} onClick={() => {setEdit(!editMod)}}>{editMod ? 'SAVE AND EXIT' : 'EDIT MODE'}</button> : ''}
         {index ? `Delete ${index.data.configName}?` : ''}
-        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" onClick={() => {handleDelete()}}>DELETE</button> : ''}
+        {(arr.length > 0 || arr2.length > 0) && index ? <button className="cfg-btn" style={{height:'35px'}} onClick={() => {handleDelete()}}>{`DELETE ${index.data.configName}`}</button> : ''}
     </div>
   
 </div>
